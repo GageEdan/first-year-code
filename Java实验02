@@ -1,0 +1,53 @@
+package shiyan02;
+
+public class Student {
+	public Student(String studentID1,String classID1,String name1,String sex1,int age1) {
+	String studentID;
+	studentID=studentID1;
+	
+	String classID;
+	classID=classID1;
+	
+	String name;
+	name=name1;
+	
+	String  sex;
+	sex=sex1;
+	
+	int age;
+	age=age1;
+	}
+	public String toString(){
+		String a="学号是"+studentID;
+		String b="班号是"+classID;
+		String c="姓名是"+name;
+		String d="性别是"+sex;
+		String e="年龄是"+age;
+		System.out.println(a);
+		System.out.println(b);
+		System.out.println(c);
+		System.out.println(d);
+		System.out.println(e);
+		return(a+b+c+d+e);
+	 }
+} 
+
+
+
+
+
+
+package shiyan02;
+public class t1 {
+
+	public static void main(String[] args) {
+		Student yzh=new Student();
+		yzh.setStudentID("022301304132");
+		yzh.setName("袁作函");
+		yzh.setSex("男");
+		yzh.setAge(18);
+		yzh.setClassID("047");
+		yzh.toString();
+	}
+
+}
