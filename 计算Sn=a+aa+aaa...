@@ -1,0 +1,19 @@
+#include<stdio.h>
+
+int main() {
+	int n, a;
+	a = 2;
+	long sum=0;
+	while (1) {
+		printf("请输入n的值:");
+		scanf("%d", &n);
+		for (long i = 0; i < n; i++) {
+			sum = sum + a + a * i * 10;
+		}
+		printf("Sn=%d\n", sum);
+		sum = 0;
+
+	}
+	
+	return 0;
+}
