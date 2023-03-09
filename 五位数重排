@@ -1,0 +1,37 @@
+#include<stdio.h>
+
+int main() {
+	int x, y;
+	int g, h, j;
+	int m, n, o, p, q;
+	printf("输入一个不多于5位的正整数");
+	scanf("%d", &x);
+	if (x < 10 && x>0)
+		y = 1, q = x % 10, 
+		printf("输入正整数每一位是：%d\n逆序输出为%d\n", q, q),
+	    printf("输入正整数的数位数为：%d\n", y);
+	else
+		if (x < 100&&x>0)
+			y = 2, p = x / 10, q = x % 10, 
+			printf("输入正整数每一位是：%d\n%d\n逆序输出为%d%d\n", p, q, q, p),	
+			printf("输入正整数的数位数为：%d\n", y);
+		else
+			if (x < 1000&&x>0)
+				y = 3, j = x / 10, p = j % 10, o = x / 100, q = x % 10, 
+				printf("输入正整数每一位是：%d\n%d\n%d\n逆序输出为%d%d%d\n", o, p, q, q, p, o),	
+				printf("输入正整数的数位数为：%d\n", y);
+			else
+				if (x < 10000&&x>0)
+					y = 4, h = x / 100, j = x / 10, n = x / 1000, o = h % 10, p = j % 10, q = x % 10, 
+					printf("输入正整数每一位是：%d\n%d\n%d\n%d\n逆序输出为%d%d%d%d\n", n, o, p, q, q, p, o, n),	
+					printf("输入正整数的数位数为：%d\n", y);
+				else
+					if (x < 100000&&x>0)
+						y = 5, g = x / 1000, h = x / 100, j = x / 10, m = x / 10000, n = g % 10, o = h % 10, p = j % 10, q = x % 10, 
+						printf("输入正整数每一位是：%d\n%d\n%d\n%d\n%d\n逆序输出为%d%d%d%d%d\n", m, n, o, p, q, q, p, o, n, m),	
+						printf("输入正整数的数位数为：%d\n", y);
+					else
+						printf("输入的数据无效");
+
+	return 0;
+}
