@@ -1,0 +1,37 @@
+#include<stdio.h>
+int main(){
+	int x, y, z, v;
+	int m, n;
+	n = 0;
+	while (1) {
+		printf("请输入四个整数，用空格分隔开：");
+		scanf("%d %d %d %d", &x, &y, &z, &v);
+		if (x > y) {
+			n = x;
+			x = y;
+			y = n;
+			}
+		if (y > z) {
+			n = y;
+			y = z;
+			z = n;
+			}
+		if (z > v) {
+			n = z;
+			z = v;
+			v = n;
+		}
+		if (x > z) {
+			n = x;
+			x = z;
+			z = n;
+		}
+		if (y > z) {
+			n = y;
+			y = z;
+			z = n;
+		}
+		printf("重新排序后为：%d %d %d %d\n", x, y, z, v);
+	}
+	return 0;
+}
