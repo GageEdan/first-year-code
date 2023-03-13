@@ -73,4 +73,58 @@ public class Application {
 
 }
 
+---------------------------------------------------------------------------------------------------------------------------
 
+package shiyan0202;
+
+public class Vehicle {
+	double speed;
+	int power;
+	public Vehicle(double speed,int power) {
+		this.power=power;
+		this.speed=speed;
+	}
+	public double getSpeed() {
+		return speed;
+	}
+	public int getPower() {
+		return power;
+	}
+	public void speedUp(int s) {
+		speed=speed+s;
+	}
+	public void speedDown(int p) {
+		speed=speed-p;
+	}
+	public void setPower(int p) {
+		power=p;
+	}
+	
+
+}
+
+
+
+
+package shiyan0202;
+
+public class User {
+
+	public static void main(String[] args) {
+		Vehicle car1=new Vehicle(10, 89);//使用带参数构造方法创建对象
+		System.out.println("Vehicle的速度是 "+car1.getSpeed());
+		System.out.println("Vehicle的功率是 "+car1.getPower());
+		car1.speedUp(33);//加速
+		car1.setPower(80);//设置功率
+		System.out.println("Vehicle的速度是 "+car1.getSpeed());
+		System.out.println("Vehicle的功率是 "+car1.getPower());
+		car1.speedDown(2);//减速
+		car1.setPower(75);//设置功率
+		System.out.println("Vehicle的速度是 "+car1.getSpeed());
+		System.out.println("Vehicle的功率是 "+car1.getPower());
+				
+
+	}
+
+}
+//write by 袁作函  GageEdan
