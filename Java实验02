@@ -1,53 +1,76 @@
-package shiyan02;
-
+package shiyan;
 public class Student {
-	public Student(String studentID1,String classID1,String name1,String sex1,int age1) {
 	String studentID;
-	studentID=studentID1;
-	
 	String classID;
-	classID=classID1;
-	
 	String name;
-	name=name1;
-	
-	String  sex;
-	sex=sex1;
-	
+	String sex;
 	int age;
-	age=age1;
+	public String getStudentID() {
+		return studentID;
 	}
-	public String toString(){
-		String a="学号是"+studentID;
-		String b="班号是"+classID;
-		String c="姓名是"+name;
-		String d="性别是"+sex;
-		String e="年龄是"+age;
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);
-		System.out.println(d);
-		System.out.println(e);
-		return(a+b+c+d+e);
-	 }
-} 
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+	public String getClassID() {
+		return classID;
+	}
+	public void setClassID(String classID) {
+		this.classID = classID;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	public Student(String studentID,String classID,String name,String sex,int age) {
+		this.studentID=studentID;
+		this.age=age;
+		this.classID=classID;
+		this.name=name;
+		this.sex=sex;
+	}
+	 public String toString(){
+			String a="学号是"+studentID;
+			String b="班号是"+classID;
+			String c="姓名是"+name;
+			String d="性别是"+sex;
+			String e="年龄是"+age;
+			return c+"  "+d+"  "+e+"  "+b+"  "+a;
+		}
+}
 
 
 
 
 
-
-package shiyan02;
-public class t1 {
-
+package shiyan;
+public class Application {
 	public static void main(String[] args) {
-		Student yzh=new Student();
-		yzh.setStudentID("022301304132");
-		yzh.setName("袁作函");
-		yzh.setSex("男");
-		yzh.setAge(18);
-		yzh.setClassID("047");
-		yzh.toString();
+		Student Skite=new Student("022301304133","0223013041","Skite","男",18);
+		Student Gage=new Student(null, null, null, null, 0);
+		Gage.setStudentID("022301304132");
+		Gage.setClassID("0223017047");
+		Gage.setName("GageEdan");
+		Gage.setSex("男");
+		Gage.setAge(18);
+		System.out.println(Skite.toString());
+		System.out.println(Gage.toString());
 	}
 
 }
+
+
