@@ -127,4 +127,58 @@ public class User {
 	}
 
 }
+
+-----------------------------------------------------------------------------------------------------------------------
+package shiyan0203;
+public class TV {
+	int channel;
+	public int getChannel() {
+		return channel;
+	}
+	public  void  setChannel(int channel) {
+		this.channel=channel;
+	}
+	public  void showProgram() {
+		System.out.println("看电视，当前频道是"+channel);
+	}
+
+}
+
+
+
+
+
+package shiyan0203;
+public class Famliy {
+	TV homeTV;
+	public void buyTV(TV TV) {
+		homeTV=TV;
+	}
+	public void remoteControl(int a) {
+		homeTV.setChannel(a);;
+	}
+	public void seeTV() {
+		homeTV.showProgram();
+	}
+	
+}	
+
+
+
+
+
+
+package shiyan0203;
+public class MainClass {
+	public static void main(String[] args) {
+		TV haierTV=new TV();
+		Famliy zhangSanFamily =new Famliy();
+		zhangSanFamily.buyTV(haierTV);
+		zhangSanFamily.remoteControl(4);
+		zhangSanFamily.seeTV();
+
+	}
+
+}
+
 //write by 袁作函  GageEdan
