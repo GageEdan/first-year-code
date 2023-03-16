@@ -1,7 +1,61 @@
-#include <stdio.h>
+#include<stdio.h>;
+#include<easyx.h>;
+#include<stdlib.h>;
+#include<time.h>:
+
+//定义地图长宽
+#define x 10
+#define y 10
+
+//定义二维数组遍历函数
+void show(int map[x][y]) {                                                          
+	for (int i=0; i < x; i++) {
+		for (int j = 0; j < y; j++) {
+			printf(" %2d",map[i][j]);
+		}
+		printf("\n");
+	}
+	
+}
+
+//定义给地图埋雷的函数
+void set(int map[x][y]) {
+       //给地图埋雷
+	int bx = 0, by = 0;
+	for (int i = 0; i < x;) {    
+		bx = rand() % 10;
+		by = rand() % 10;
+		if (map[bx][by] == 0) {
+			i++;
+			map[bx][by] = -1;
+		}
+	}
+       //给雷周围的数字加一
+	for (int i = 0; i < y; i++) {  
+		for (int j = 0; j < x; j++) {
+			if (map[i][j] == -1) {                    //判断map[i][j]是否是雷(-1)
+				for (int c = i - 1; c <= i + 1; c++) {        //是雷的格子周围一圈加1
+					for (int v = j - 1; v <= j + 1; v++) {   
+						//判断加1的格子是否是雷,是否在地图外(条件为c v同时大于等于0，小于x y，且map[c][v]不是雷)
+						if ((c >= 0 && c < x && v >= 0 && v < x) && map[c][v] != -1) {    
+							map[c][v]++;
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 int main()
 {
-    printf("hello world/n");
-    return 0;
+	int map[x][y] = { 0 };//定义初始化地图
+    srand((unsigned)time(NULL));
+	set(map);
+	show(map);
+	//遍历二维数组
+
+
+	printf("Create By GageEdan");
+	return 0;
 }
