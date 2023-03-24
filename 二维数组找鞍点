@@ -1,0 +1,68 @@
+#include<stdio.h>
+#define chang 10
+#define kuan 10
+int a[chang][kuan];
+
+void showArray(int m, int n){
+	printf("数据为:");
+	for (int c = 0; c < m; c++) {
+			printf("\n");
+		for (int v = 0; v < n; v++) {
+			printf("%3d  ", a[c][v]);
+		}
+	}
+}
+
+int main() {
+	int i, j, k,m, n,cy,h,l, max,min,note,s ;
+	max = 0;
+	min = 0;
+	cy = 0;
+	while (1) {
+		s = 0;
+		printf("请依次输入要处理行数与列数，用空格隔开");
+		scanf("%d %d", &m, &n);
+		if (m > chang || n > kuan) {
+			printf("输入的行数列数太大了!\n\n");
+			continue;
+		}
+		printf("请输入要处理的数据");
+		for (i = 0; i < m; i++) {
+			for (j = 0; j < n; j++) {
+				scanf("%d", &a[i][j]);
+			}
+		}
+		showArray(m, n);
+		for (i = 0; i < m; i++) {
+			note = 0;
+			for (j = 0; j < n; j++) {
+				if (note == 0) {
+					max = a[i][j];
+				}
+				if (a[i][j] >= max) {
+					max = a[i][j];
+					cy = j;
+					note = 1;
+					min = a[i][j];
+				}
+			}
+			for (k = 0; k < m; k++) {
+				if (a[k][cy] < min) {
+					min = a[k][cy];
+					h = k + 1;
+					l = cy + 1;
+				}
+			}
+			if (min == max) {
+				printf("\n找到鞍点%d，在第%d行第%d列\n\n", max, h, l);
+				s = 1;
+			}
+		}
+		if (s == 0) {
+			printf("\n没有找到鞍点\n\n");
+		}
+	}
+	
+	
+	return 0;
+}
