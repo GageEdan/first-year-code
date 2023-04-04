@@ -1,5 +1,4 @@
 #include<stdio.h>
-
 int main() {
 	int  m, n;
 	int a, b;
@@ -28,7 +27,43 @@ int main() {
 			j++;
 		}
 	}
-	
-
 	return 0;
 }
+
+
+
+//使用函数及算法改进：
+
+#include<stdio.h>
+static int m, n;
+static int i = 0;
+void maxyue() {
+	int a, b;
+	printf("输入两个数，用空格隔开");
+	scanf("%d %d", &m, &n);
+	int g, k;
+	if (m > n)
+		g = n, k = m;
+	else g = m, k = n;
+	for (i = k; i >= 1; i) {
+		if (m % i == 0 && n % i == 0) {
+			printf("最大公约数为%d\n", i);
+			break;
+		}
+		i--;
+	}
+}
+void minbei() {
+	int j;
+	j = m * n /i;
+	printf("最小公倍数为%d\n\n", j);
+}
+int main() {
+	while (1){
+		maxyue();
+		minbei();
+	}
+	return 0;
+}
+
+
