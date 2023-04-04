@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+//函数实现
+
+void cha(int n) {
+	printf("从1到%d中的素数有：", n);
+	for (int i = 1; i <= n; i++) {
+		for (int j = 2; j < i; j++) {
+			if (i % j == 0) {
+				break;
+			}
+			else if (j == i - 1) {
+				printf("%d  ", i);
+				break;
+			}
+		}
+		if (i == n) {
+			printf("\n\n");
+		}
+	}
+}
+int main() {
+	while (1){
+		int n = 0;
+		printf("请输入n的值：");
+		scanf("%d", &n);
+		cha(n);
+	}
+	return 0;
+}
