@@ -1,0 +1,39 @@
+#include<stdio.h>
+int getdays(int year, int mounth, int day) {
+	int mounth2 = 0;
+	if (year % 4 == 0) {
+		mounth2 = 29;
+	}
+	else{
+		mounth2 = 28;
+	}
+	for (int i = 1; i < mounth; i++) {
+		switch (i) {
+		case(1): day = day + 31; break;
+		case(2):day = day + mounth2; break;
+		case(3):day = day + 31; break;
+		case(4):day = day + 30; break;
+		case(5):day = day + 31; break;
+		case(6):day = day + 30; break;
+		case(7):day = day + 31; break;
+		case(8):day = day + 31; break;
+		case(9):day = day + 30; break;
+		case(10):day = day + 31; break;
+		case(11):day = day + 30; break;
+		case(12):day = day + 31; break;
+		default:printf("输入的日期不合法");
+		}
+	}
+	return day;
+}
+int main() {
+	while (1){
+		int d;
+		int a = 0, b = 0, c = 0;
+		printf("请输入一个日期,年月日之间用空格隔开");
+		scanf("%d %d %d", &a, &b, &c);
+		d = getdays(a, b, c);
+		printf("该日是该年的第%d天\n\n", d);
+	}
+	return 0;
+}
