@@ -1,0 +1,39 @@
+#include<stdio.h>
+int j = 0;
+int max = 0;
+int m = 0, n = 0;
+char a[1000];
+void cha() {
+	printf("请输入：");
+	for (int i = 0; i < 1000; i++) {
+		scanf("%c", &a[i]);
+		if (a[i] == '\n') {
+			break;
+		}
+	}
+	for (int i = 0; i < 1000; i++) {
+		if (a[i] >= 65 && a[i] <= 90 || a[i] >= 97 && a[i] <= 122) {
+			j++;
+			if (j > max) {
+				max = j;
+				m = i;
+			}
+		}
+		else {
+			j = 0;
+		}
+	}
+	printf("最长的单词为：");
+	for (int i = m - max + 1; i <= m; i++) {
+		printf("%c", a[i]);
+		if (i == m) {
+			printf("\n\n");
+		}
+	}
+}
+int main() {
+	while (1){
+		cha();
+	}
+	return 0;
+}
