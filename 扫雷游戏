@@ -4,58 +4,177 @@
 #include<time.h>:
 
 //定义地图长宽
-#define x 10
-#define y 10
+#define c 10
+#define k 10
+//格子大小
+#define size 40   
+//结构体
+ExMessage msg;
+/*---------------------------------------------函数部分------------------------------------------------------------------------*/
+//声明鼠标左键操作的函数
+void open(int map[c][k], int x, int y);
 
 //定义二维数组遍历函数
-void show(int map[x][y]) {                                                          
-	for (int i=0; i < x; i++) {
-		for (int j = 0; j < y; j++) {
+void show(int map[c][k]) {                                                          
+	for (int i=0; i < c; i++) {
+		for (int j = 0; j < k; j++) {
 			printf(" %2d",map[i][j]);
 		}
 		printf("\n");
 	}
-	
 }
 
 //定义给地图埋雷的函数
-void set(int map[x][y]) {
+void set(int map[c][k]) {
        //给地图埋雷
-	int bx = 0, by = 0;
-	for (int i = 0; i < x;) {    
-		bx = rand() % 10;
-		by = rand() % 10;
-		if (map[bx][by] == 0) {
+	int boomx = 0, boomy = 0;
+	for (int i = 0; i < c;) {    
+		boomx = rand() % c;
+		boomy = rand() % k;
+		if (map[boomx][boomy] == 0) {
 			i++;
-			map[bx][by] = -1;
+			map[boomx][boomy] = -1;
 		}
 	}
        //给雷周围的数字加一
-	for (int i = 0; i < y; i++) {  
-		for (int j = 0; j < x; j++) {
+	for (int i = 0; i < k; i++) {  
+		for (int j = 0; j < c; j++) {
 			if (map[i][j] == -1) {                    //判断map[i][j]是否是雷(-1)
-				for (int c = i - 1; c <= i + 1; c++) {        //是雷的格子周围一圈加1
+				for (int b = i - 1; b <= i + 1; b++) {        //是雷的格子周围一圈加1
 					for (int v = j - 1; v <= j + 1; v++) {   
-						//判断加1的格子是否是雷,是否在地图外(条件为c v同时大于等于0，小于x y，且map[c][v]不是雷)
-						if ((c >= 0 && c < x && v >= 0 && v < x) && map[c][v] != -1) {    
-							map[c][v]++;
+						//判断加1的格子是否是雷,是否在地图外(条件为b v同时大于等于0，小于x y，且map[b][v]不是雷)
+						if ((b >= 0 && b < c && v >= 0 && v < k) && map[b][v] != -1) {    
+							map[b][v]++;
 						}
 					}
 				}
 			}
 		}
 	}
+	for (int i = 0; i < k; i++) {
+		for (int j = 0; j < c; j++) {
+			map[i][j] = map[i][j] + 100;
+		}
+	}
 }
 
-int main()
-{
-	int map[x][y] = { 0 };//定义初始化地图
-    srand((unsigned)time(NULL));
-	set(map);
-	show(map);
-	//遍历二维数组
+//定义加载图片函数
+void loadingimage(IMAGE img[]) {
+	loadimage(img + 0, "./image/0.png", 40, 40);
+	loadimage(img + 1, "./image/1.png", 40, 40);
+	loadimage(img + 2, "./image/2.png", 40, 40);
+	loadimage(img + 3, "./image/3.png", 40, 40);
+	loadimage(img + 4, "./image/4.png", 40, 40);
+	loadimage(img + 5, "./image/5.png", 40, 40);
+	loadimage(img + 6, "./image/6.png", 40, 40);
+	loadimage(img + 7, "./image/7.png", 40, 40);
+	loadimage(img + 8, "./image/8.png", 40, 40);
+	loadimage(img + 9, "./image/9.png", 40, 40);
+	loadimage(img + 10, "./image/10.png", 40, 40);
+	loadimage(img + 11, "./image/11.png", 40, 40);
+	loadimage(img + 12, "./image/12.png", 40, 40);
+}
 
+//定义绘制游戏窗口函数
+void gamestar(IMAGE img[], int map[c][k]) {
+	int win = 0;      //判断游戏通关
+	int st = 0;       //判断游戏开始
+	for (int i = 0; i < c; i++) {
+		for (int j = 0; j < k; j++) {
+			putimage(i * size, j * size, img + 10);
+		}
+	}
+	while (true) {
+		if (peekmessage(&msg, EX_MOUSE)) {
+			int my = msg.x/size;  //将鼠标坐标信息转化为数据
+			int mx = msg.y/size;
+			//鼠标左键
+			if (msg.message == WM_LBUTTONDOWN) { 
+				if (map[my][mx] < 110 && msg.y < k * size) {
+					st = 1;
+					map[my][mx] = map[my][mx] - 100;
+					open(map, mx, my);
+				}
+			}
+			for (int i = 0; i < c; i++) {               //地图变化
+				for (int j = 0; j < k; j++) {
+					if (map[i][j] >= 1 && map[i][j] <= 9) {
+						putimage(i * size, j * size, img + map[i][j]);
+					}
+					else if (map[i][j] == -1) {
+						putimage(i * size, j * size, img + 0);
+					}
+					else if (map[i][j] == 0) {
+						putimage(i * size, j * size, img + 11);
+					}
+				}
+			}
+			//鼠标右键
+			if (msg.message == WM_RBUTTONDOWN) {    
+				if (map[my][mx] >= 99 && map[my][mx] < 110 && msg.y < k * size) {
+					putimage(my * size, mx * size, img + 12);
+					map[my][mx] = map[my][mx] + 100;
+					if (map[my][mx] == 199) {
+						win++;
+					}
+				}
+				else if (map[my][mx] > 110 && msg.y < k * size) {
+					putimage(my * size, mx * size, img + 10);
+					map[my][mx] = map[my][mx]-100;
+				}
+			}
+			//判断标记是否为雷
+			
+		}
+		settextstyle(30, 0,"");
+		if (win == 10) {
+			clearrectangle(0, 400, 180, 440);
+			outtextxy(0, 400, "You Are Win");
+			break;
+		}
+		if (st == 1) {                                               //当游戏开始时
+			outtextxy(0, 400, "Game Star");
+			char trans_win[40];
+			sprintf(trans_win, "%d", 10-win);
+			outtextxy(200, 400, trans_win);
+			clock_t start = clock();                                //开始计时
+			char trans_time[40];
+			sprintf(trans_time, "%d", start / 1000);
+			if (win != 10) {
+				outtextxy(275, 400,"Time:" );
+				outtextxy(355, 400, trans_time);
+			}
+		}
+	}
+	
+}
 
+//鼠标左键操作
+void open(int map[c][k], int x, int y) {                           
+	if (map[y][x] == 0) {
+		for (int i = y - 1; i <= y + 1; i++) {
+			for (int j = x - 1; j <= x + 1; j++) {
+				if (i < c && j < k && i >= 0 && j >= 0) {
+					if (map[i][j] >= 99 && map[i][j] <= 109) {
+						map[i][j] = map[i][j] - 100;
+						open(map, j, i);                         //递归
+					}
+				}
+			}
+		}
+	}
+}
+/*------------------------------------------------程序入口----------------------------------------------------------------------*/
+int main(){
+	int map[c][k] = { 0 };//初始化地图
+    srand((unsigned)time(NULL));//设置随机数种子
+	initgraph(size * c, size * k+40);  //定义画布（界面）大小                           400 400
+	set(map);//埋雷
+	IMAGE img[20];      //图片数组
+	loadingimage(img);  //加载图片
+	gamestar(img,map);  //开始游戏
+	
 	printf("Create By GageEdan");
+	getchar();
 	return 0;
 }
