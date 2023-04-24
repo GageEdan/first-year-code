@@ -58,7 +58,33 @@ int main() {
 }
 
 
+//使用指针从小到大排列三个整数
 
+
+#include<stdio.h>
+int main() {
+	printf("请输入三个整数:");
+	int a, b, c;
+	int* d, * e, * f, * g;
+	d = &a;
+	e = &b;
+	f = &c;
+	scanf("%d %d %d", &a, &b, &c);
+	for (int i = 0; i < 2; i++){
+		if (*d > *e) {
+			g = d;
+			d = e;
+			e = g;
+		}
+		if (*e > *f) {
+			g = e;
+			e = f;
+			f = g;
+		}
+	}
+	printf("排列后:%d  %d  %d", *d, *e, *f);
+	return 0;
+}
 
 
 
