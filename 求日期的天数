@@ -1,7 +1,7 @@
 #include<stdio.h>
 int getdays(int year, int mounth, int day) {
 	int mounth2 = 0;
-	if (year % 4 == 0) {
+	if (year % 4 == 0 && year % 100 != 0) {
 		mounth2 = 29;
 	}
 	else{
@@ -37,3 +37,67 @@ int main() {
 	}
 	return 0;
 }
+
+
+
+
+/*  结构体   */
+
+
+
+
+
+#include<stdio.h>
+struct date {
+	int year;
+	int mouth;
+	int day;
+};
+
+void doy(date d1) {
+	int num = 0;
+	num += d1.day;
+	for (int i = 1; i <d1.mouth; i++){
+		if (i == 2) {
+			if (d1.year % 4 == 0 && d1.year % 100 != 0) {
+				num += 29;
+				continue;
+			}
+			else{
+				num += 28;
+				continue;
+			}
+		}
+		if (i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12) {
+			num += 31;
+		}
+		else {
+			num += 30;
+		}
+	}
+	printf("该日期是这一年的第%d天\n", num);
+}
+
+int main() {
+	struct date d1;
+	d1.day = 22;
+	d1.mouth = 4;
+	d1.year = 2004;
+	doy(d1);
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
